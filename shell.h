@@ -1,4 +1,3 @@
-
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
@@ -53,7 +52,6 @@ typedef struct sep_list_s
 	struct sep_list_s *next;
 } sep_list;
 
-/**
  * struct line_list_s - 
  * @line: 
  * @next: 
@@ -207,7 +205,6 @@ char *error_env(data_shell *datash);
 char *error_syntax(char **args);
 char *error_permission(char **args);
 char *error_path_126(data_shell *datash);
-
 
 /* g.c */
 int get_error(data_shell *datash, int eval);
