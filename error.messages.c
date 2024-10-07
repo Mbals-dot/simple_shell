@@ -118,5 +118,6 @@ char *error_exit_shell(data_shell *datash) {
   if (error == 0) {
     free(ver_str);
     return (NULL);
-  }
-  // Concatenate
+}
+} 
+// Concatenate

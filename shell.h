@@ -91,8 +91,8 @@ typedef struct builtin_s
 } builtin_t;
 
 /* a.c */
-sep_list *add_sep_node_end(sep_list **head, char sep);
-void free_sep_list(sep_list **head);
+//sep_list *add_sep_node_end(sep_list **head, char sep);
+//void free_sep_list(sep_list **head);
 line_list *add_line_node_end(line_list **head, char *line);
 void free_line_list(line_list **head);
 
@@ -138,8 +138,8 @@ char *read_line(int *i_eof);
 
 /* s.c */
 char *swap_char(char *input, int bool);
-void add_nodes(sep_list **head_s, line_list **head_l, char *input);
-void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
+//void add_nodes(sep_list **head_s, line_list **head_l, char *input);
+//void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
 int split_commands(data_shell *datash, char *input);
 char **split_line(char *input);
 
