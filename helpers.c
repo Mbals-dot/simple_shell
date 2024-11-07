@@ -1,11 +1,7 @@
 #include "shell.h"
+#include <unistd.h>  /* Include for write and STDERR_FILENO */
 
-/**
- * print_error - Prints an error message with the command name.
- * @command: The command that caused the error.
- */
-void print_error(char *command)
-{
+void print_error(char *command) {
     write(STDERR_FILENO, command, strlen(command));
-    write(STDERR_FILENO, ": not found\n", 12);
+    write(STDERR_FILENO, ": command not found\n", 20);
 }

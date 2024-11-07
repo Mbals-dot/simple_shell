@@ -1,32 +1,49 @@
 #include "shell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
- * main - Entry point of the simple shell program.
+ * main - Entry point for the simple shell.
  *
- * Return: Always 0 on success.
+ * Return: Always 0.
  */
 int main(void)
 {
-    char *command;
+    char *line;
+    char **args;
     int status = 1;
 
     while (status)
     {
+        /* Display prompt */
         display_prompt();
-        command = read_command();
-        if (command == NULL)
+
+        /* Read line */
+        line = read_line();
+        if (!line)
         {
-            /* Handle end of file (Ctrl+D) */
-            write(STDOUT_FILENO, "\n", 1);
+            perror("Error reading line");
+            exit(EXIT_FAILURE);
+        }
+
+        /* Check for the 'exit' command */
+        if (strcmp(line, "exit") == 0)
+        {
+            free(line);
             break;
         }
-        if (strcmp(command, "exit") == 0)
+
+        /* Parse line and execute command */
+        args = parse_line(line);
+        if (args[0] != NULL)
         {
-            free(command);
-            break;
+            status = execute_command(args);
         }
-        status = execute_command(command);
-        free(command);
+
+        /* Free memory */
+        free(line);
+        free(args);
     }
 
     return 0;

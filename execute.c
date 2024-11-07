@@ -1,39 +1,25 @@
 #include "shell.h"
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>  /* Include for fork, execve, and wait */
 
-/**
- * execute_command - Executes a command.
- * @command: The command to execute.
- *
- * Return: 1 to continue running, 0 to stop.
- */
-int execute_command(char *command)
-{
+int execute_command(char **args) {
     pid_t pid;
-    char *argv[2];
-
-    argv[0] = command;
-    argv[1] = NULL;
+    int status;
 
     pid = fork();
-    if (pid == -1)
-    {
-        perror("Error:");
-        return 1;
-    }
-    if (pid == 0)
-    {
+    if (pid == 0) {
         /* Child process */
-        if (execve(command, argv, NULL) == -1)
-        {
-            perror("./hsh");
+        if (execve(args[0], args, NULL) == -1) {
+            perror("execve error");
         }
         exit(EXIT_FAILURE);
-    }
-    else
-    {
+    } else if (pid < 0) {
+        /* Forking error */
+        perror("fork error");
+    } else {
         /* Parent process */
-        wait(NULL);
+        wait(&status);
     }
-
-    return 1;
+    return status;
 }
